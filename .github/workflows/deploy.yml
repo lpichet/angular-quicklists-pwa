@@ -27,9 +27,7 @@ jobs:
       - name: Build Angular app
         run: npm run build --base-href angular-quicklists-pwa
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy GitHub Pages site
+        uses: actions/deploy-pages@v4.0.5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/angular-quicklists-pwa
-          enable_jekyll: true
+          artifact_name: dist/angular-quicklists-pwa
