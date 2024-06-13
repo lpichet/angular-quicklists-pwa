@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+
+:root {
+  --color-primary: #1c1d3b;
+  --color-secondary: #2b2d55;
+  --color-dark: #1c1d3b;
+  --color-light: #ffffff;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--color-dark);
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: var(--color-light);
+}
+
+section {
+  height: 100%;
+  padding: 2rem;
+  background: var(--color-primary);
+}
+
+button {
+  height: 30px;
+}
+
+.dialog-container {
+  background: var(--color-dark);
+  border-radius: 8px;
+  min-width: 500px;
+}
