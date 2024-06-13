@@ -29,7 +29,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build --base-href=/angular-quicklists-pwa/browser
+        run: npm run build:gh-pages
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
