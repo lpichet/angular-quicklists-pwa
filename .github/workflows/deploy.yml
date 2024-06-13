@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build --base-href /angular-quicklists-pwa/
+        run: npm run build --base-href /angular-quicklists-pwa
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
