@@ -7,8 +7,7 @@ export class AppDB extends Dexie {
     checkListItems!: Table<ChecklistItem, string>;
   
     constructor() {
-      super('quicklists', { autoOpen: true});
-      console.log('AppDB constructor');
+      super('quicklists');
       this.version(3).stores({
         checkLists: '&id',
         checkListItems: '&id, checklistId',
