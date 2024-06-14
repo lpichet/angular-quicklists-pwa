@@ -45,14 +45,19 @@ export class ChecklistService {
         })),
       error: (err) => this.state.update((state) => ({ ...state, error: err })),
     });
-    this.add$.pipe(takeUntilDestroyed()).subscribe((checklist) =>
-      this.state.update((state) => ({
-        ...state,
-        checklists: [...state.checklists, this.addIdToChecklist(checklist)],
-      }))
+    this.add$.pipe(takeUntilDestroyed()).subscribe(async (addChecklist) =>
+      {
+        const checklist = this.addIdToChecklist(addChecklist);
+        await this.storageService.addChecklist(checklist);
+        return this.state.update((state) => ({
+          ...state,
+          checklists: [...state.checklists, ],
+        }))
+    }
     );
-    this.edit$.pipe(takeUntilDestroyed()).subscribe((update) =>
-      this.state.update((state) => ({
+    this.edit$.pipe(takeUntilDestroyed()).subscribe( async (update) => {
+      await this.storageService.editChecklist({id: update.id, ...update.data});
+      return this.state.update((state) => ({
         ...state,
         checklists: state.checklists.map((checklist) =>
           checklist.id === update.id
@@ -60,19 +65,22 @@ export class ChecklistService {
             : checklist
         ),
       }))
+    }
     );
-    this.remove$.pipe(takeUntilDestroyed()).subscribe((id) =>
-      this.state.update((state) => ({
+    this.remove$.pipe(takeUntilDestroyed()).subscribe(async (id) => {
+      await this.storageService.removeChecklist(id);
+      return this.state.update((state) => ({
         ...state,
         checklists: state.checklists.filter((checklist) => checklist.id !== id),
       }))
+    }
     );
     // effects
-    effect(() => {
-      if (this.loaded()) {
-        this.storageService.saveChecklists(this.checklists());
-      }
-    });
+    // effect(() => {
+    //   if (this.loaded()) {
+    //     this.storageService.saveChecklists(this.checklists());
+    //   }
+    // });
   }
 
   private addIdToChecklist(checklist: AddChecklist): Checklist {

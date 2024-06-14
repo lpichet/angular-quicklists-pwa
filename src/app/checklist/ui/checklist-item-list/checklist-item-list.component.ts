@@ -44,11 +44,14 @@ import { ChecklistItem, RemoveChecklistItem } from '../../../shared/interfaces/c
         list-style-type: none;
         margin-bottom: 1rem;
         padding: 1rem;
-
+      }
         button {
           margin-left: 1rem;
         }
-      }
+
+        h2, p {
+          color: var(--color-light);
+        }
     `,
   ],
 })
